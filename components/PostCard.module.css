@@ -1,0 +1,15 @@
+.post-card {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.post-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.post-card div {
+  color: #555;
+}

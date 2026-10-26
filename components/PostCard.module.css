@@ -1,15 +1,49 @@
-.post-card {
-  border: 1px solid #eee;
-  border-radius: 5px;
-  padding: 16px;
-  margin-bottom: 16px;
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
 }
 
-.post-card h2 {
-  margin-top: 0;
-  font-size: 1.5rem;
+.date {
+  color: var(--muted);
+  font-size: 0.875rem;
 }
 
-.post-card div {
-  color: #555;
+.title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.excerpt {
+  color: var(--muted);
+  flex: 1;
+}
+
+.link {
+  font-weight: 600;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.categories li {
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.75rem;
 }

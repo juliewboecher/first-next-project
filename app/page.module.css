@@ -1,13 +1,6 @@
-.page {
-  padding: 20px;
-  background-color: #f9f9f9;
-}
-
-.main {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.intro {
-  margin-bottom: 40px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }

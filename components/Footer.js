@@ -1,13 +1,9 @@
-import Link from "next/link";
+import styles from "./Footer.module.css";
 
-export default function Header() {
+export default function Footer() {
   return (
-    <header>
-      <nav>
-        <Link href="/">Forside</Link>
-        <Link href="/posts">Posts</Link>
-        <Link href="/about">About</Link>
-      </nav>
-    </header>
+    <footer className={styles.footer}>
+      <p>© 2026 My First Next.js App. All rights reserved.</p>
+    </footer>
   );
 }

@@ -4,17 +4,19 @@ import styles from "./PostCard.module.css";
 
 export default function PostCard({ post }) {
   // With ?_embed, WordPress includes the featured image and categories in _embedded
-  const image = post._embedded?.["wp:featuredmedia"]?.[0];
+  
+const image = post?._embedded?.["wp:featuredmedia"]?.[0];
+const imageUrl = image?.source_url;
   const categories = post._embedded?.["wp:term"]?.[0] ?? [];
   const date = formatDate(post.date);
 
   return (
     <article className={styles.card}>
-      {image && (
+      {imageUrl && (
         <img
           className={styles.image}
-          src={image.source_url}
-          alt={image.alt_text}
+          src={imageUrl}
+          alt={image?.alt_text || ""}
         />
       )}
       {categories.length > 0 && (

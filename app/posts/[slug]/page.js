@@ -4,9 +4,7 @@ import { notFound } from "next/navigation";
 
 export default async function PostPage({ params }) {
   const { slug } = await params;
-
   const wordpressUrl = process.env.WORDPRESS_URL;
-
   if (!wordpressUrl) {
     throw new Error("WORDPRESS_URL mangler i .env.local");
   }
@@ -24,7 +22,6 @@ export default async function PostPage({ params }) {
 
   const posts = await response.json();
   const post = posts[0];
-
   if (!post) {
     notFound();
   }
@@ -33,14 +30,6 @@ export default async function PostPage({ params }) {
     <main>
       <article className={styles.post}>
         <Link href="/posts">← Alle indlæg</Link>
-
-        <time className={styles.date} dateTime={post.date}>
-          {new Date(post.date).toLocaleDateString("da-DK", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </time>
 
         <h1
           dangerouslySetInnerHTML={{

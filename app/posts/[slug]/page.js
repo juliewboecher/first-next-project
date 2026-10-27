@@ -1,47 +1,40 @@
-import styles from "./page.module.css";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getPostBySlug } from "@/lib/wordpress";
+import { formatDate } from "@/lib/format";
+import styles from "./page.module.css";
 
 export default async function PostPage({ params }) {
   const { slug } = await params;
-  const wordpressUrl = process.env.WORDPRESS_URL;
-  if (!wordpressUrl) {
-    throw new Error("WORDPRESS_URL mangler i .env.local");
-  }
+  const post = await getPostBySlug(slug);
 
-  const response = await fetch(
-    `${wordpressUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}`,
-    {
-      next: { revalidate: 60 },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error("Kunne ikke hente indlæg fra WordPress");
-  }
-
-  const posts = await response.json();
-  const post = posts[0];
   if (!post) {
     notFound();
   }
 
+  // With ?_embed, WordPress includes the featured image in _embedded
+  const image = post._embedded?.["wp:featuredmedia"]?.[0];
+
+  const date = formatDate(post.date);
+
   return (
     <main>
       <article className={styles.post}>
-        <Link href="/posts">← Alle indlæg</Link>
-
-        <h1
-          dangerouslySetInnerHTML={{
-            __html: post.title.rendered,
-          }}
-        />
-
+        <Link href="/posts">← All posts</Link>
+        <time className={styles.date} dateTime={post.date}>
+          {date}
+        </time>
+        <h1 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+        {image && (
+          <img
+            className="featured-image"
+            src={image.source_url}
+            alt={image.alt_text}
+          />
+        )}
         <div
           className="wp-content"
-          dangerouslySetInnerHTML={{
-            __html: post.content.rendered,
-          }}
+          dangerouslySetInnerHTML={{ __html: post.content.rendered }}
         />
       </article>
     </main>

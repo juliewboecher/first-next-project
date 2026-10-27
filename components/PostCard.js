@@ -19,13 +19,7 @@ const imageUrl = image?.source_url;
           alt={image?.alt_text || ""}
         />
       )}
-      {categories.length > 0 && (
-        <ul className={styles.categories}>
-          {categories.map((category) => (
-            <li key={category.id}>{category.name}</li>
-          ))}
-        </ul>
-      )}
+      
       <time className={styles.date} dateTime={post.date}>
         {date}
       </time>
